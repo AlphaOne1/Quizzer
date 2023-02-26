@@ -23,6 +23,41 @@ paths:
                     schema:
                         $ref: "#/definitions/Task"
 
+    /api/task/{id}/solve:
+        get:
+            parameters:
+              - name: id
+                in: path
+                type: integer
+                format: int64
+                required: true
+              - name: solutionID
+                in: query
+                type: integer
+                format: int64
+                required: true
+            responses:
+                200:
+                    description: Check if solution is correct
+                    schema:
+                        type: boolean
+
+    /api/task/{id}/resolve:
+        get:
+            parameters:
+              - name: id
+                in: path
+                type: integer
+                format: int64
+                required: true
+            responses:
+                200:
+                    description: Correct answers
+                    schema:
+                        type: array
+                        items:
+                            $ref: "#/definitions/Answer"
+
 definitions:
     Task:
         properties:

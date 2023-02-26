@@ -45,6 +45,12 @@ func NewQuestionerAPI(spec *loads.Document) *QuestionerAPI {
 		GetAPITaskIDHandler: GetAPITaskIDHandlerFunc(func(params GetAPITaskIDParams) middleware.Responder {
 			return middleware.NotImplemented("operation GetAPITaskID has not yet been implemented")
 		}),
+		GetAPITaskIDResolveHandler: GetAPITaskIDResolveHandlerFunc(func(params GetAPITaskIDResolveParams) middleware.Responder {
+			return middleware.NotImplemented("operation GetAPITaskIDResolve has not yet been implemented")
+		}),
+		GetAPITaskIDSolveHandler: GetAPITaskIDSolveHandlerFunc(func(params GetAPITaskIDSolveParams) middleware.Responder {
+			return middleware.NotImplemented("operation GetAPITaskIDSolve has not yet been implemented")
+		}),
 	}
 }
 
@@ -83,6 +89,10 @@ type QuestionerAPI struct {
 
 	// GetAPITaskIDHandler sets the operation handler for the get API task ID operation
 	GetAPITaskIDHandler GetAPITaskIDHandler
+	// GetAPITaskIDResolveHandler sets the operation handler for the get API task ID resolve operation
+	GetAPITaskIDResolveHandler GetAPITaskIDResolveHandler
+	// GetAPITaskIDSolveHandler sets the operation handler for the get API task ID solve operation
+	GetAPITaskIDSolveHandler GetAPITaskIDSolveHandler
 
 	// ServeError is called when an error is received, there is a default handler
 	// but you can set your own with this
@@ -162,6 +172,12 @@ func (o *QuestionerAPI) Validate() error {
 
 	if o.GetAPITaskIDHandler == nil {
 		unregistered = append(unregistered, "GetAPITaskIDHandler")
+	}
+	if o.GetAPITaskIDResolveHandler == nil {
+		unregistered = append(unregistered, "GetAPITaskIDResolveHandler")
+	}
+	if o.GetAPITaskIDSolveHandler == nil {
+		unregistered = append(unregistered, "GetAPITaskIDSolveHandler")
 	}
 
 	if len(unregistered) > 0 {
@@ -255,6 +271,14 @@ func (o *QuestionerAPI) initHandlerCache() {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
 	o.handlers["GET"]["/api/task/{id}"] = NewGetAPITaskID(o.context, o.GetAPITaskIDHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/api/task/{id}/resolve"] = NewGetAPITaskIDResolve(o.context, o.GetAPITaskIDResolveHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/api/task/{id}/solve"] = NewGetAPITaskIDSolve(o.context, o.GetAPITaskIDSolveHandler)
 }
 
 // Serve creates a http handler to serve the API over HTTP

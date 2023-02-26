@@ -42,6 +42,16 @@ func configureAPI(api *operations.QuestionerAPI) http.Handler {
 			return middleware.NotImplemented("operation operations.GetAPITaskID has not yet been implemented")
 		})
 	}
+	if api.GetAPITaskIDResolveHandler == nil {
+		api.GetAPITaskIDResolveHandler = operations.GetAPITaskIDResolveHandlerFunc(func(params operations.GetAPITaskIDResolveParams) middleware.Responder {
+			return middleware.NotImplemented("operation operations.GetAPITaskIDResolve has not yet been implemented")
+		})
+	}
+	if api.GetAPITaskIDSolveHandler == nil {
+		api.GetAPITaskIDSolveHandler = operations.GetAPITaskIDSolveHandlerFunc(func(params operations.GetAPITaskIDSolveParams) middleware.Responder {
+			return middleware.NotImplemented("operation operations.GetAPITaskIDSolve has not yet been implemented")
+		})
+	}
 
 	api.PreServerShutdown = func() {}
 

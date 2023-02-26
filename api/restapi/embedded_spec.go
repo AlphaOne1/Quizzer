@@ -48,6 +48,58 @@ func init() {
           }
         }
       }
+    },
+    "/api/task/{id}/resolve": {
+      "get": {
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int64",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Correct answers",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Answer"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/task/{id}/solve": {
+      "get": {
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int64",
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "name": "solutionID",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Check if solution is correct",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -108,6 +160,58 @@ func init() {
             "description": "Task to be worked on",
             "schema": {
               "$ref": "#/definitions/Task"
+            }
+          }
+        }
+      }
+    },
+    "/api/task/{id}/resolve": {
+      "get": {
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int64",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Correct answers",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Answer"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/task/{id}/solve": {
+      "get": {
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int64",
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "name": "solutionID",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Check if solution is correct",
+            "schema": {
+              "type": "boolean"
             }
           }
         }
