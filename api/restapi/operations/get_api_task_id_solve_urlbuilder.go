@@ -16,9 +16,9 @@ import (
 
 // GetAPITaskIDSolveURL generates an URL for the get API task ID solve operation
 type GetAPITaskIDSolveURL struct {
-	ID int64
+	ID uint64
 
-	SolutionID int64
+	SolutionID uint64
 
 	_basePath string
 	// avoid unkeyed usage
@@ -46,7 +46,7 @@ func (o *GetAPITaskIDSolveURL) Build() (*url.URL, error) {
 
 	var _path = "/api/task/{id}/solve"
 
-	id := swag.FormatInt64(o.ID)
+	id := swag.FormatUint64(o.ID)
 	if id != "" {
 		_path = strings.Replace(_path, "{id}", id, -1)
 	} else {
@@ -58,7 +58,7 @@ func (o *GetAPITaskIDSolveURL) Build() (*url.URL, error) {
 
 	qs := make(url.Values)
 
-	solutionIDQ := swag.FormatInt64(o.SolutionID)
+	solutionIDQ := swag.FormatUint64(o.SolutionID)
 	if solutionIDQ != "" {
 		qs.Set("solutionID", solutionIDQ)
 	}

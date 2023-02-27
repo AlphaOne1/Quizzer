@@ -2,7 +2,7 @@ package config
 
 type Root struct {
 	ListenAddress string `json:"listenAddress"`
-	ListenPort    string `json:"listenPort"`
+	ListenPort    int    `json:"listenPort"`
 	Tasks         []Task `json:"tasks"`
 }
 

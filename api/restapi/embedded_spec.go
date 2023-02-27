@@ -33,7 +33,7 @@ func init() {
         "parameters": [
           {
             "type": "integer",
-            "format": "int64",
+            "format": "uint64",
             "name": "id",
             "in": "path",
             "required": true
@@ -54,7 +54,7 @@ func init() {
         "parameters": [
           {
             "type": "integer",
-            "format": "int64",
+            "format": "uint64",
             "name": "id",
             "in": "path",
             "required": true
@@ -78,14 +78,14 @@ func init() {
         "parameters": [
           {
             "type": "integer",
-            "format": "int64",
+            "format": "uint64",
             "name": "id",
             "in": "path",
             "required": true
           },
           {
             "type": "integer",
-            "format": "int64",
+            "format": "uint64",
             "name": "solutionID",
             "in": "query",
             "required": true
@@ -107,7 +107,7 @@ func init() {
       "properties": {
         "id": {
           "type": "integer",
-          "format": "int64"
+          "format": "uint64"
         },
         "text": {
           "type": "string"
@@ -124,7 +124,7 @@ func init() {
         },
         "id": {
           "type": "integer",
-          "format": "int64"
+          "format": "uint64"
         },
         "question": {
           "type": "string"
@@ -149,7 +149,7 @@ func init() {
         "parameters": [
           {
             "type": "integer",
-            "format": "int64",
+            "format": "uint64",
             "name": "id",
             "in": "path",
             "required": true
@@ -170,7 +170,7 @@ func init() {
         "parameters": [
           {
             "type": "integer",
-            "format": "int64",
+            "format": "uint64",
             "name": "id",
             "in": "path",
             "required": true
@@ -194,14 +194,14 @@ func init() {
         "parameters": [
           {
             "type": "integer",
-            "format": "int64",
+            "format": "uint64",
             "name": "id",
             "in": "path",
             "required": true
           },
           {
             "type": "integer",
-            "format": "int64",
+            "format": "uint64",
             "name": "solutionID",
             "in": "query",
             "required": true
@@ -223,7 +223,7 @@ func init() {
       "properties": {
         "id": {
           "type": "integer",
-          "format": "int64"
+          "format": "uint64"
         },
         "text": {
           "type": "string"
@@ -240,7 +240,7 @@ func init() {
         },
         "id": {
           "type": "integer",
-          "format": "int64"
+          "format": "uint64"
         },
         "question": {
           "type": "string"

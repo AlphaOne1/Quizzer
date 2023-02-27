@@ -23,7 +23,7 @@ type Task struct {
 	Answers []*Answer `json:"answers"`
 
 	// id
-	ID int64 `json:"id,omitempty"`
+	ID uint64 `json:"id,omitempty"`
 
 	// question
 	Question string `json:"question,omitempty"`

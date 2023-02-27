@@ -6,7 +6,12 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"questioner/api"
+	"questioner/api/restapi"
+	"questioner/api/restapi/operations"
 	"questioner/config"
+
+	"github.com/go-openapi/loads"
 )
 
 func main() {
@@ -47,5 +52,22 @@ func main() {
 	log.Printf("server address: %v", config.ListenAddress)
 	log.Printf("server port: %v", config.ListenPort)
 
-	os.Exit(0)
+	spec, specErr := loads.Embedded(restapi.SwaggerJSON, restapi.FlatSwaggerJSON)
+
+	if specErr != nil {
+		log.Fatalf("could not initialize spec: %v", specErr)
+	}
+
+	qapi := operations.NewQuestionerAPI(spec)
+	qapi.GetAPITaskIDHandler = operations.GetAPITaskIDHandlerFunc(api.GetTask(config.Tasks))
+
+	server := restapi.NewServer(qapi)
+	server.Host = config.ListenAddress
+	server.Port = config.ListenPort
+
+	defer server.Shutdown()
+
+	if err := server.Serve(); err != nil {
+		log.Fatalln(err)
+	}
 }

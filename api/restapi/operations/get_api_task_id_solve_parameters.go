@@ -37,12 +37,12 @@ type GetAPITaskIDSolveParams struct {
 	  Required: true
 	  In: path
 	*/
-	ID int64
+	ID uint64
 	/*
 	  Required: true
 	  In: query
 	*/
-	SolutionID int64
+	SolutionID uint64
 }
 
 // BindRequest both binds and validates a request, it assumes that complex things implement a Validatable(strfmt.Registry) error interface
@@ -81,9 +81,9 @@ func (o *GetAPITaskIDSolveParams) bindID(rawData []string, hasKey bool, formats 
 	// Required: true
 	// Parameter is provided by construction from the route
 
-	value, err := swag.ConvertInt64(raw)
+	value, err := swag.ConvertUint64(raw)
 	if err != nil {
-		return errors.InvalidType("id", "path", "int64", raw)
+		return errors.InvalidType("id", "path", "uint64", raw)
 	}
 	o.ID = value
 
@@ -107,9 +107,9 @@ func (o *GetAPITaskIDSolveParams) bindSolutionID(rawData []string, hasKey bool, 
 		return err
 	}
 
-	value, err := swag.ConvertInt64(raw)
+	value, err := swag.ConvertUint64(raw)
 	if err != nil {
-		return errors.InvalidType("solutionID", "query", "int64", raw)
+		return errors.InvalidType("solutionID", "query", "uint64", raw)
 	}
 	o.SolutionID = value
 

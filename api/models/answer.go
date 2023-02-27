@@ -18,7 +18,7 @@ import (
 type Answer struct {
 
 	// id
-	ID int64 `json:"id,omitempty"`
+	ID uint64 `json:"id,omitempty"`
 
 	// text
 	Text string `json:"text,omitempty"`
