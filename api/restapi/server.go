@@ -26,7 +26,7 @@ import (
 	"github.com/go-openapi/swag"
 	"golang.org/x/net/netutil"
 
-	"questioner/api/restapi/operations"
+	"quizzer/api/restapi/operations"
 )
 
 const (
@@ -146,8 +146,8 @@ func intEnvOverride(orig int, def int, keys ...string) int {
 	return orig
 }
 
-// NewServer creates a new api questioner server but does not configure it
-func NewServer(api *operations.QuestionerAPI) *Server {
+// NewServer creates a new api quizzer server but does not configure it
+func NewServer(api *operations.QuizzerAPI) *Server {
 	s := new(Server)
 
 	s.EnabledListeners = enabledListeners
@@ -190,7 +190,7 @@ func (s *Server) ConfigureFlags() {
 	}
 }
 
-// Server for the questioner API
+// Server for the quizzer API
 type Server struct {
 	EnabledListeners []string
 	CleanupTimeout   time.Duration
@@ -219,7 +219,7 @@ type Server struct {
 	TLSWriteTimeout   time.Duration
 	httpsServerL      net.Listener
 
-	api          *operations.QuestionerAPI
+	api          *operations.QuizzerAPI
 	handler      http.Handler
 	hasListeners bool
 	shutdown     chan struct{}
@@ -249,7 +249,7 @@ func (s *Server) Fatalf(f string, args ...interface{}) {
 }
 
 // SetAPI configures the server with the specified API. Needs to be called before Serve
-func (s *Server) SetAPI(api *operations.QuestionerAPI) {
+func (s *Server) SetAPI(api *operations.QuizzerAPI) {
 	if api == nil {
 		s.api = nil
 		s.handler = nil
@@ -310,13 +310,13 @@ func (s *Server) Serve() (err error) {
 
 		servers = append(servers, domainSocket)
 		wg.Add(1)
-		s.Logf("Serving questioner at unix://%s", s.SocketPath)
+		s.Logf("Serving quizzer at unix://%s", s.SocketPath)
 		go func(l net.Listener) {
 			defer wg.Done()
 			if err := domainSocket.Serve(l); err != nil && err != http.ErrServerClosed {
 				s.Fatalf("%v", err)
 			}
-			s.Logf("Stopped serving questioner at unix://%s", s.SocketPath)
+			s.Logf("Stopped serving quizzer at unix://%s", s.SocketPath)
 		}(s.domainSocketL)
 	}
 
@@ -340,13 +340,13 @@ func (s *Server) Serve() (err error) {
 
 		servers = append(servers, httpServer)
 		wg.Add(1)
-		s.Logf("Serving questioner at http://%s", s.httpServerL.Addr())
+		s.Logf("Serving quizzer at http://%s", s.httpServerL.Addr())
 		go func(l net.Listener) {
 			defer wg.Done()
 			if err := httpServer.Serve(l); err != nil && err != http.ErrServerClosed {
 				s.Fatalf("%v", err)
 			}
-			s.Logf("Stopped serving questioner at http://%s", l.Addr())
+			s.Logf("Stopped serving quizzer at http://%s", l.Addr())
 		}(s.httpServerL)
 	}
 
@@ -433,13 +433,13 @@ func (s *Server) Serve() (err error) {
 
 		servers = append(servers, httpsServer)
 		wg.Add(1)
-		s.Logf("Serving questioner at https://%s", s.httpsServerL.Addr())
+		s.Logf("Serving quizzer at https://%s", s.httpsServerL.Addr())
 		go func(l net.Listener) {
 			defer wg.Done()
 			if err := httpsServer.Serve(l); err != nil && err != http.ErrServerClosed {
 				s.Fatalf("%v", err)
 			}
-			s.Logf("Stopped serving questioner at https://%s", l.Addr())
+			s.Logf("Stopped serving quizzer at https://%s", l.Addr())
 		}(tls.NewListener(s.httpsServerL, httpsServer.TLSConfig))
 	}
 

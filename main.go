@@ -6,10 +6,10 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"questioner/api"
-	"questioner/api/restapi"
-	"questioner/api/restapi/operations"
-	"questioner/config"
+	"quizzer/api"
+	"quizzer/api/restapi"
+	"quizzer/api/restapi/operations"
+	"quizzer/config"
 
 	"github.com/go-openapi/loads"
 )
@@ -58,7 +58,7 @@ func main() {
 		log.Fatalf("could not initialize spec: %v", specErr)
 	}
 
-	qapi := operations.NewQuestionerAPI(spec)
+	qapi := operations.NewQuizzerAPI(spec)
 	qapi.GetAPITaskIDHandler = operations.GetAPITaskIDHandlerFunc(api.GetTask(config.Tasks))
 
 	server := restapi.NewServer(qapi)

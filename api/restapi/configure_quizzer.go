@@ -10,16 +10,16 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/runtime/middleware"
 
-	"questioner/api/restapi/operations"
+	"quizzer/api/restapi/operations"
 )
 
-//go:generate swagger generate server --target ../../api --name Questioner --spec ../api.yaml --principal interface{} --exclude-main
+//go:generate swagger generate server --target ../../api --name Quizzer --spec ../api.yaml --principal interface{} --exclude-main
 
-func configureFlags(api *operations.QuestionerAPI) {
+func configureFlags(api *operations.QuizzerAPI) {
 	// api.CommandLineOptionsGroups = []swag.CommandLineOptionsGroup{ ... }
 }
 
-func configureAPI(api *operations.QuestionerAPI) http.Handler {
+func configureAPI(api *operations.QuizzerAPI) http.Handler {
 	// configure the api here
 	api.ServeError = errors.ServeError
 

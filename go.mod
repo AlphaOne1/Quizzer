@@ -1,4 +1,4 @@
-module questioner
+module quizzer
 
 go 1.20
 

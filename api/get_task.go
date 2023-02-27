@@ -1,9 +1,9 @@
 package api
 
 import (
-	"questioner/api/models"
-	"questioner/api/restapi/operations"
-	"questioner/config"
+	"quizzer/api/models"
+	"quizzer/api/restapi/operations"
+	"quizzer/config"
 
 	"github.com/go-openapi/runtime/middleware"
 )

@@ -10,7 +10,7 @@ import (
 
 	"github.com/go-openapi/runtime"
 
-	"questioner/api/models"
+	"quizzer/api/models"
 )
 
 // GetAPITaskIDResolveOKCode is the HTTP code returned for type GetAPITaskIDResolveOK
