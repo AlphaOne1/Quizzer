@@ -1,6 +1,7 @@
 module quizzer
 
 go 1.22
+toolchain go1.23.7
 
 require (
 	github.com/go-openapi/errors v0.22.0
@@ -10,7 +11,7 @@ require (
 	github.com/go-openapi/strfmt v0.23.0
 	github.com/go-openapi/swag v0.23.0
 	github.com/go-openapi/validate v0.24.0
-	golang.org/x/net v0.34.0
+	golang.org/x/net v0.36.0
 )
 
 require (
