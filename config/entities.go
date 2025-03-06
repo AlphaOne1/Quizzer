@@ -1,17 +1,17 @@
 package config
 
 type Root struct {
-	ListenAddress string `json:"listenAddress"`
-	ListenPort    int    `json:"listenPort"`
-	Tasks         []Task `json:"tasks"`
+	ListenAddress string `yaml:"listenAddress"`
+	ListenPort    int    `yaml:"listenPort"`
+	Tasks         []Task `yaml:"tasks"`
 }
 
 type Task struct {
-	Question string   `json:"question"`
-	Answers  []Answer `json:"answers"`
+	Question string   `yaml:"question"`
+	Answers  []Answer `yaml:"answers"`
 }
 
 type Answer struct {
-	Text      string `json:"text"`
-	IsCorrect bool   `json:"isCorrect"`
+	Text      string `yaml:"text"`
+	IsCorrect bool   `yaml:"isCorrect"`
 }

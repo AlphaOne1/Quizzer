@@ -1,17 +1,19 @@
 package main
 
 import (
-	"encoding/json"
+	"context"
+	"errors"
 	"flag"
 	"fmt"
-	"log"
+	"log/slog"
+	"net/http"
 	"os"
+
 	"quizzer/api"
 	"quizzer/api/restapi"
-	"quizzer/api/restapi/operations"
 	"quizzer/config"
 
-	"github.com/go-openapi/loads"
+	"github.com/AlphaOne1/templig"
 )
 
 func main() {
@@ -33,41 +35,44 @@ func main() {
 	var configFileName string
 	flag.StringVar(&configFileName, "config", "config.json", "configuration file")
 
-	configFile, configFileErr := os.Open(configFileName)
+	cfg, cfgErr := templig.FromFile[config.Root](configFileName)
 
-	if configFileErr != nil {
-		log.Fatalf("couldn't open configuration file %v: %v", configFileName, configFileErr)
+	if cfgErr != nil {
+		slog.Error("could not read configuration file", slog.String("error", cfgErr.Error()))
+		os.Exit(1)
 	}
 
-	defer configFile.Close()
+	slog.Info("configuration loaded")
+	slog.Info("tasks available", slog.Int("num_tasks", len(cfg.Get().Tasks)))
+	slog.Info("server config",
+		slog.String("address", cfg.Get().ListenAddress),
+		slog.Int("port", cfg.Get().ListenPort),
+	)
 
-	var config config.Root
-
-	if decodeErr := json.NewDecoder(configFile).Decode(&config); decodeErr != nil {
-		log.Fatalf("could not read configuration in %v: %v", configFileName, decodeErr)
+	handler := &api.Handler{
+		Tasks: cfg.Get().Tasks,
 	}
 
-	log.Printf("configuration loaded")
-	log.Printf("%v tasks available", len(config.Tasks))
-	log.Printf("server address: %v", config.ListenAddress)
-	log.Printf("server port: %v", config.ListenPort)
+	service, serviceErr := restapi.NewServer(handler)
 
-	spec, specErr := loads.Embedded(restapi.SwaggerJSON, restapi.FlatSwaggerJSON)
-
-	if specErr != nil {
-		log.Fatalf("could not initialize spec: %v", specErr)
+	if serviceErr != nil {
+		slog.Error("could not start API server", slog.String("error", serviceErr.Error()))
+		os.Exit(1)
 	}
 
-	qapi := operations.NewQuizzerAPI(spec)
-	qapi.GetAPITaskIDHandler = operations.GetAPITaskIDHandlerFunc(api.GetTask(config.Tasks))
+	server := &http.Server{
+		Addr:    fmt.Sprintf("%s:%d", cfg.Get().ListenAddress, cfg.Get().ListenPort),
+		Handler: service,
+	}
 
-	server := restapi.NewServer(qapi)
-	server.Host = config.ListenAddress
-	server.Port = config.ListenPort
+	defer func() { _ = server.Shutdown(context.Background()) }()
 
-	defer server.Shutdown()
+	if err := server.ListenAndServe(); err != nil {
+		if errors.Is(err, http.ErrServerClosed) {
+			slog.Error("server shutdown unexpectedly")
+			os.Exit(1)
+		}
 
-	if err := server.Serve(); err != nil {
-		log.Fatalln(err)
+		slog.Info("server shutdown")
 	}
 }

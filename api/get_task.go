@@ -1,27 +1,27 @@
 package api
 
 import (
-	"quizzer/api/models"
-	"quizzer/api/restapi/operations"
-	"quizzer/config"
+	"context"
+	"fmt"
 
-	"github.com/go-openapi/runtime/middleware"
+	"quizzer/api/restapi"
 )
 
-func GetTask(tasks []config.Task) func(operations.GetAPITaskIDParams) middleware.Responder {
-	return func(params operations.GetAPITaskIDParams) middleware.Responder {
-		if params.ID >= uint64(len(tasks)) {
-			return operations.NewGetAPITaskIDOK().WithPayload(nil)
-		}
-
-		task := models.Task{}
-		task.Question = tasks[params.ID].Question
-		task.Answers = []*models.Answer{}
-
-		for k, v := range tasks[params.ID].Answers {
-			task.Answers = append(task.Answers, &models.Answer{ID: uint64(k), Text: v.Text})
-		}
-
-		return operations.NewGetAPITaskIDOK().WithPayload(&task)
+func (h Handler) APITaskIDGet(ctx context.Context, params restapi.APITaskIDGetParams) (*restapi.Task, error) {
+	if params.ID >= uint64(len(h.Tasks)) {
+		return nil, fmt.Errorf("invalid task id: %d", params.ID)
 	}
+
+	task := &restapi.Task{}
+	task.Question = restapi.NewOptString(h.Tasks[params.ID].Question)
+	task.Answers = []restapi.Answer{}
+
+	for k, v := range h.Tasks[params.ID].Answers {
+		task.Answers = append(task.Answers, restapi.Answer{
+			ID:   restapi.NewOptUint64(uint64(k)),
+			Text: restapi.NewOptString(v.Text),
+		})
+	}
+
+	return task, nil
 }
