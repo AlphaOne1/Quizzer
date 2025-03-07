@@ -62,7 +62,7 @@ jobs:
             with:
                 fetch-depth: 1
           - name: VulnerabilityCheck
-            uses: golang/govulncheck-action@@1.0.4
+            uses: golang/govulncheck-action@v1.0.4
             # optional
             with:
                 go-version-input: ${{matrix.go-version}}
