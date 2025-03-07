@@ -65,7 +65,7 @@ jobs:
             uses: golang/govulncheck-action@@1.0.4
             # optional
             with:
-                go-version-input: ${{matrix.go-version}}:
+                go-version-input: ${{matrix.go-version}}
 
     Test:
         strategy:
