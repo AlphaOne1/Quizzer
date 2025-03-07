@@ -14,11 +14,11 @@ jobs:
         runs-on: ubuntu-latest
         steps:
           - name: Install Go
-            uses: actions/setup-go@v3
+            uses: actions/setup-go@v5.3.0
             with:
                 go-version: ${{matrix.go-version}}
           - name: Checkout
-            uses: actions/checkout@v3
+            uses: actions/checkout@v4.2.2
             with:
                 fetch-depth: 1
           - name: FormatCheck
@@ -32,15 +32,15 @@ jobs:
         runs-on: ubuntu-latest
         steps:
           - name: Install Go
-            uses: actions/setup-go@v3
+            uses: actions/setup-go@v5.3.0
             with:
                 go-version: ${{matrix.go-version}}
           - name: Checkout
-            uses: actions/checkout@v3
+            uses: actions/checkout@v4.2.2
             with:
                 fetch-depth: 1
           - name: StaticCheck
-            uses: dominikh/staticcheck-action@v1.3.0
+            uses: dominikh/staticcheck-action@v1.3.1
             with:
                 version: latest
                 install-go: false
@@ -54,15 +54,15 @@ jobs:
         runs-on: ubuntu-latest
         steps:
           - name: Install Go
-            uses: actions/setup-go@v3
+            uses: actions/setup-go@v5.3.0
             with:
                 go-version: ${{matrix.go-version}}
           - name: Checkout
-            uses: actions/checkout@v3
+            uses: actions/checkout@v4.2.2
             with:
                 fetch-depth: 1
           - name: VulnerabilityCheck
-            uses: kmulvey/govulncheck-action@main
+            uses: kmulvey/govulncheck-action@1.0.4
             # optional
             with:
                 packages: '.'
@@ -79,11 +79,11 @@ jobs:
         runs-on: ${{matrix.platform}}
         steps:
           - name: Install Go
-            uses: actions/setup-go@v3
+            uses: actions/setup-go@v5.3.0
             with:
                 go-version: ${{matrix.go-version}}
           - name: Checkout
-            uses: actions/checkout@v3
+            uses: actions/checkout@v4.2.2
             with:
                 fetch-depth: 1
           - name: Test
