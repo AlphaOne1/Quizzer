@@ -7,14 +7,11 @@ import (
 
 	"github.com/go-faster/errors"
 	"github.com/go-faster/jx"
-	"go.opentelemetry.io/otel/codes"
-	"go.opentelemetry.io/otel/trace"
 )
 
-func encodeAPITaskIDGetResponse(response *Task, w http.ResponseWriter, span trace.Span) error {
+func encodeAPITaskIDGetResponse(response *Task, w http.ResponseWriter) error {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	response.Encode(e)
@@ -25,10 +22,9 @@ func encodeAPITaskIDGetResponse(response *Task, w http.ResponseWriter, span trac
 	return nil
 }
 
-func encodeAPITaskIDResolveGetResponse(response []Answer, w http.ResponseWriter, span trace.Span) error {
+func encodeAPITaskIDResolveGetResponse(response []Answer, w http.ResponseWriter) error {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	e.ArrStart()
@@ -43,10 +39,9 @@ func encodeAPITaskIDResolveGetResponse(response []Answer, w http.ResponseWriter,
 	return nil
 }
 
-func encodeAPITaskIDSolveGetResponse(response bool, w http.ResponseWriter, span trace.Span) error {
+func encodeAPITaskIDSolveGetResponse(response bool, w http.ResponseWriter) error {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
-	span.SetStatus(codes.Ok, http.StatusText(200))
 
 	e := new(jx.Encoder)
 	e.Bool(response)
