@@ -242,7 +242,7 @@ func decodeAPITaskIDSolveGetParams(args [1]string, argsEscaped bool, r *http.Req
 				return err
 			}
 		} else {
-			return validate.ErrFieldRequired
+			return err
 		}
 		return nil
 	}(); err != nil {
