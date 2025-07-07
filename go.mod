@@ -3,7 +3,7 @@ module quizzer
 go 1.24.0
 
 require (
-	github.com/AlphaOne1/templig v0.8.0
+	github.com/AlphaOne1/templig v0.8.1
 	github.com/go-faster/errors v0.7.1
 	github.com/go-faster/jx v1.1.0
 	github.com/ogen-go/ogen v1.14.0
