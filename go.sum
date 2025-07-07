@@ -1,7 +1,7 @@
 dario.cat/mergo v1.0.2 h1:85+piFYR1tMbRrLcDwR18y4UKJ3aH1Tbzi24VRW1TK8=
 dario.cat/mergo v1.0.2/go.mod h1:E/hbnu0NxMFBjpMIE34DRGLWqDy0g5FuKDhCb31ngxA=
-github.com/AlphaOne1/templig v0.8.0 h1:0b3CeclUmrsHsxt9iKyNf1HnROpA/AoDHz7geIDy7KU=
-github.com/AlphaOne1/templig v0.8.0/go.mod h1:RrYgjTWONQIEzYMmReXXoR1BLHdYEYOVjmKjpKlafRw=
+github.com/AlphaOne1/templig v0.8.1 h1:bTtAVK8UrdROiexzkXJ8HwWwvU8DB7NLtyeDsRVGh/g=
+github.com/AlphaOne1/templig v0.8.1/go.mod h1:RrYgjTWONQIEzYMmReXXoR1BLHdYEYOVjmKjpKlafRw=
 github.com/Masterminds/goutils v1.1.1 h1:5nUrii3FMTL5diU80unEVvNevw1nH4+ZV4DSLVJLSYI=
 github.com/Masterminds/goutils v1.1.1/go.mod h1:8cTjp+g8YejhMuvIA5y2vz3BpJxksy863GQaJW2MFNU=
 github.com/Masterminds/semver/v3 v3.3.1 h1:QtNSWtVZ3nBfk8mAOu/B6v7FMJ+NHTIgUPi7rj+4nv4=
