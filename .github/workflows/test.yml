@@ -65,6 +65,7 @@ jobs:
             uses: golang/govulncheck-action@v1.0.4
             # optional
             with:
+                repo-checkout: false
                 go-version-input: ${{matrix.go-version}}
 
     Test:
