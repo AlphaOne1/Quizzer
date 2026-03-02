@@ -1,6 +1,6 @@
 module quizzer
 
-go 1.25.0
+go 1.25
 
 require (
 	github.com/AlphaOne1/templig v0.9.1
