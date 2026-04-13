@@ -6,7 +6,7 @@ require (
 	github.com/AlphaOne1/templig v0.9.2
 	github.com/go-faster/errors v0.7.1
 	github.com/go-faster/jx v1.2.0
-	github.com/ogen-go/ogen v1.20.2
+	github.com/ogen-go/ogen v1.20.3
 )
 
 require (
